@@ -1,0 +1,19 @@
+{
+    "name": "@oracle/sql-developer-api",
+    "version": "25.1.0",
+    "description": "Provides Typescript type definitions for the API exposed by Oracle SQL Developer Extension for VSCode",
+    "main": "",
+    "license": "UPL-1.0",
+    "private": false,
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "update:version": "./scripts/update-version",
+        "licensify": "./scripts/licensify",
+        "bundle": "dts-bundle-generator --config dts-config.js",
+        "build": "yarn bundle && yarn licensify && yarn update:version"
+    },
+    "devDependencies": {
+        "dts-bundle-generator": "^9.5.1",
+        "typescript": "^5.7.3"
+    }
+}

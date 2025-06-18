@@ -1,57 +1,43 @@
-*Detailed instructions on how to contribute to the project, if applicable. Must include section about Oracle Contributor Agreement with link and instructions*
-
 # Contributing to this repository
 
-We welcome your contributions! There are multiple ways to contribute.
+Thank you for your interest in contributing to this repository—your efforts are highly appreciated. This document should provide you with everything you need to get started.
+
+## Asking Questions
+
+If you have questions regarding the extension or its API, we highly recommend posting them in the [QA][qa-link] section under the extension's home page in the marketplace.
 
 ## Opening issues
 
 For bugs or enhancement requests, please file a GitHub issue unless it's
 security related. When filing a bug remember that the better written the bug is,
-the more likely it is to be fixed. If you think you've found a security
-vulnerability, do not raise a GitHub issue and follow the instructions in our
-[security policy](./SECURITY.md).
+the more likely it is to be fixed, the [How to file an issue](#how-to-file-an-issue) section provides guidelines to follow when filing issues. If you think you've found a security
+vulnerability, do not raise a GitHub issue and follow the instructions in our [security policy](./SECURITY.md).
 
-## Contributing code
+### How to file an issue
 
-We welcome your code contributions. Before submitting code via a pull request,
-you will need to have signed the [Oracle Contributor Agreement][OCA] (OCA) and
-your commits need to include the following line using the name and e-mail
-address you used to sign the OCA:
+#### Bugs
 
-```text
-Signed-off-by: Your Name <you@example.org>
-```
+- First make sure the issue has not been reported before, by searching in [open issues][issues-link].
+- Provide a detailed report that includes:
+   - A brief summary describing the bug.
+   - Steps to reproduce, along with any sample data, logs, ...etc.
+   - Current versus expected behavior.
+   - Extension version that has the defect e.g. 25.1.0.
+   - OS environment in which the extension was being used e.g. Windows.
+   - Any other information you want to share that is relevant to the issue being reported.
 
-This can be automatically added to pull requests by committing with `--sign-off`
-or `-s`, e.g.
+#### Feature requests
 
-```text
-git commit --signoff
-```
-
-Only pull requests from committers that can be verified as having signed the OCA
-can be accepted.
-
-## Pull request process
-
-1. Ensure there is an issue created to track and discuss the fix or enhancement
-   you intend to submit.
-1. Fork this repository.
-1. Create a branch in your fork to implement the changes. We recommend using
-   the issue number as part of your branch name, e.g. `1234-fixes`.
-1. Ensure that any documentation is updated with the changes that are required
-   by your change.
-1. Ensure that any samples are updated if the base image has been changed.
-1. Submit the pull request. *Do not leave the pull request blank*. Explain exactly
-   what your changes are meant to do and provide simple steps on how to validate.
-   your changes. Ensure that you reference the issue you created as well.
-1. We will assign the pull request to 2-3 people for review before it is merged.
+Feature and enhancement requests are welcomed, before you file one, take time to gather enough information that justify the request. Examples of the information we look for include:
+- Motivation: document why do you think the feature/enhancement is needed, how will it be useful to users, ...etc.
+- Scope & goals: describe the scope and goals of the feature, and how does it align with our product's scope and goals.
 
 ## Code of conduct
 
-Follow the [Golden Rule](https://en.wikipedia.org/wiki/Golden_Rule). If you'd
-like more specific guidelines, see the [Contributor Covenant Code of Conduct][COC].
+Follow the [Golden Rule][golden-rule-link]. If you'd like more specific guidelines, see the [Contributor Covenant Code of Conduct][cccc-link].
 
-[OCA]: https://oca.opensource.oracle.com
-[COC]: https://www.contributor-covenant.org/version/1/4/code-of-conduct/
+<!-- Links -->
+[issues-link]: https://github.com/oracle-samples/sql-developer-vscode/issues
+[qa-link]: https://marketplace.visualstudio.com/items?itemName=Oracle.sql-developer&ssr=false#qna
+[golden-rule-link]: https://en.wikipedia.org/wiki/Golden_Rule
+[cccc-link]: https://www.contributor-covenant.org/version/1/4/code-of-conduct/
