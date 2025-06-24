@@ -13,10 +13,10 @@ Support documentation can be found [here](https://docs.oracle.com/en/database/or
 ## Contributing
 Please review our [contribution guide](./CONTRIBUTING.md)
 
-# Security
+## Security
 Please consult the [security guide](./SECURITY.md) for our responsible security vulnerability disclosure process
 
-# License
+## License
 Copyright (c) 2025 Oracle and/or its affiliates.
 
 Released under the Universal Permissive License v1.0 as shown at https://oss.oracle.com/licenses/upl/.
