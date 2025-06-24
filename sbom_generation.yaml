@@ -14,7 +14,7 @@ steps:
     name: "Install dependencies & cyclonedx-node-npm package"
     command: |
       cd extension-api
-      yarn install && yarn add -D @cyclonedx/cyclonedx-npm@1.19.3
+      yarn install && yarn add -D @cyclonedx/cyclonedx-npm
   - type: Command
     name: "Run cyclonedx-node-npm on extension-api"
     command: |
