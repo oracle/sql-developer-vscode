@@ -11,16 +11,27 @@ shell: bash
 
 steps:
   - type: Command
-    name: "Install dependencies & cyclonedx-node-npm package"
+    name: "Install corepack"
     command: |
       cd extension-api
-      yarn install && yarn add -D @cyclonedx/cyclonedx-npm
+      npm install -g corepack
   - type: Command
-    name: "Run cyclonedx-node-npm on extension-api"
+    name: "Install latest yarn"
     command: |
       cd extension-api
-      # For more details, visit https://github.com/CycloneDX/cyclonedx-node-npm/blob/main/README.md
-      npx @cyclonedx/cyclonedx-npm --omit dev --output-format JSON --output-file artifactSBOM.json --spec-version 1.4 --flatten-components
+      yarn set version stable
+      yarn install
+  - type: Command
+    name: "Install extension-api dependencies"
+    command: |
+      cd extension-api
+      yarn install
+  - type: Command
+    name: "Run cyclonedx-node-yarn on extension-api"
+    command: |
+      cd extension-api
+      # For more details, visit https://github.com/CycloneDX/cyclonedx-node-yarn/blob/main/README.md
+      yarn dlx -q @cyclonedx/yarn-plugin-cyclonedx --production --output-format JSON --output-file artifactSBOM.json --spec-version 1.4
 outputArtifacts:
   - name: artifactSBOM
     type: BINARY
