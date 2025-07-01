@@ -11,6 +11,14 @@ shell: bash
 
 steps:
   - type: Command
+    name: "Install Node.js 22 and matching npm"
+    command: |
+      # Ref https://github.com/oracle/netsuite-suitecloud-sdk/blob/master/sbom_generation.yaml
+      curl -fsSL https://rpm.nodesource.com/setup_22.x | bash -
+      yum install -y nodejs
+      node -v
+      npm -v
+  - type: Command
     name: "Install corepack"
     command: |
       cd extension-api
