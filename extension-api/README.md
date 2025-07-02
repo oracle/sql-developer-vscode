@@ -44,12 +44,12 @@ yarn add --dev @types/vscode
 
 NPM
 ```sh
-npm install --save-dev sqldeveloper-api
+npm install --save-dev @oracle/sql-developer-api
 ```
 
 YARN
 ```sh
-yarn add --dev sqldeveloper-api
+yarn add --dev @oracle/sql-developer-api
 ```
 
 # Usage
@@ -175,13 +175,13 @@ The following table lists all available worksheets methods:
 
 </table>
 
-Consult [the code samples](../samples) for more examples and code snippets on how to use different parts of the API.
+Consult [the code samples](https://github.com/oracle/sql-developer-vscode/tree/main/samples) for more examples and code snippets on how to use different parts of the API.
 
 <!-- # Changelog: skipped for first release, will be used starting from next release -->
 
 ## Contributing
 
-Please review our [contribution guide](../CONTRIBUTING.md)
+Please review our [contribution guide](https://github.com/oracle/sql-developer-vscode/blob/main/CONTRIBUTING.md)
 
 # License
 

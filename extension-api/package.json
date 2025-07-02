@@ -6,6 +6,19 @@
     "license": "UPL-1.0",
     "private": false,
     "types": "dist/index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/oracle/sql-developer-vscode.git",
+        "directory": "extension-api"
+    },
+    "keywords": [
+        "Oracle",
+        "SQL",
+        "SQL Developer",
+        "Database",
+        "VSCode",
+        "API"
+    ],
     "scripts": {
         "update:version": "./scripts/update-version",
         "licensify": "./scripts/licensify",
