@@ -218,13 +218,13 @@ The following table lists all available worksheets methods:
 
 Consult [the code samples](https://github.com/oracle/sql-developer-vscode/tree/main/samples) for more examples and code snippets on how to use different parts of the API.
 
-# Changelog:
+# Changelog
 
 Refer to the [changelog](./CHANGELOG.md) for full release notes and version history.
 
 # Contributing
 
-Please review our [contribution guide](https://github.com/oracle/sql-developer-vscode/blob/main/CONTRIBUTING.md)
+Please review our [contribution guide](https://github.com/oracle/sql-developer-vscode/blob/main/CONTRIBUTING.md).
 
 # Security
 
