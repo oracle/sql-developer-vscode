@@ -41,7 +41,7 @@
 import { Readable } from 'node:stream';
 import { Disposable as Disposable$1, Event as Event$1, TextEditor } from 'vscode';
 
-declare enum BindDataType {
+export const enum BindDataType {
 	CHAR = "CHAR",
 	NCHAR = "NCHAR",
 	NVARCHAR2 = "NVARCHAR2",
@@ -72,44 +72,126 @@ declare enum BindDataType {
 	JSON = "JSON",
 	XML = "XML"
 }
-declare enum BindMode {
+export const enum BindMode {
 	IN = "IN",
 	OUT = "OUT",
 	INOUT = "INOUT",
 	UNKNOWN = "UNKNOWN",
 	RETURNING = "RETURNING"
 }
-type BindVariable = {
+export type BindVariable = {
 	name: string;
 	value: string;
 	dataType: BindDataType;
 	mode?: BindMode;
 };
-interface ResultSet {
-	query(): SqlQuery;
-	rows(): {
-		[key: string]: any;
-	}[];
-	metadata(): {
-		[key: string]: any;
-	}[];
-	hasNext(): boolean;
-	next(): Promise<{
-		[key: string]: any;
-	}[] | undefined>;
-	close(): Promise<void>;
-}
-type SqlQuery = {
-	sql: string;
-	binds?: BindVariable[];
+export type Position = {
+	/**
+	 * Line position in a document (zero-based).
+	 */
+	line: number;
+	/**
+	 * Character offset on a line in a document (zero-based).
+	 * If the character value is greater than the line length it defaults back to the line length.
+	 *
+	 */
+	character: number;
 };
-type Link = {
+type Range$1 = {
+	start: Position;
+	end: Position;
+};
+export const enum SqlStatementType {
+	QUERY = "query",
+	OTHER = "other",
+	IGNORE = "ignore",
+	PLSQL = "plsql",
+	SQLPLUS = "sqlplus",
+	DML = "dml",
+	TRANSACTION_CONTROL = "transaction-control",
+	SESSION_CONTROL = "session-control",
+	SYSTEM_CONTROL = "system-control",
+	DDL = "ddl",
+	JDBC = "jdbc"
+}
+export const enum EchoMode {
+	NORMAL = "NORMAL",
+	HIDDEN = "HIDDEN"
+}
+export const enum SubstitutionKind {
+	PROMPT_ALWAYS = "PROMPT_ALWAYS",
+	PROMPT_FIRST = "PROMPT_FIRST",
+	ACCEPT = "ACCEPT",
+	DEFINED = "DEFINED"
+}
+export type Substitution = {
+	/**
+	 * The substitution variable name
+	 */
+	name: string;
+	/**
+	 * The type of substitution prompt
+	 */
+	kind: SubstitutionKind;
+	/**
+	 * The textual range that the substitution replaces
+	 */
+	range?: Range$1;
+	/**
+	 * The data type the value MUST conform to
+	 */
+	dataType?: string;
+	/**
+	 * The format the value MUST conform to
+	 */
+	format?: string;
+	/**
+	 * The default value to show in the prompt
+	 */
+	defaultValue?: string;
+	/**
+	 * The end user facing prompt
+	 */
+	prompt?: string;
+	/**
+	 * Indicate if the entered value should be displayed
+	 */
+	echoMode?: EchoMode;
+	/**
+	 * The value assigned to the substitution. Only provided for `Kind.DEFINED`
+	 */
+	value?: string;
+};
+export type SqlPrepareResponse = {
+	statementType?: SqlStatementType;
+	/**
+	 * The text of the SQL statement
+	 */
+	statementText?: string;
+	/**
+	 * The SQL_ID for SQL queries. Present when `statementType == query`
+	 */
+	statementSqlId?: string;
+	/**
+	 * The range of the selected statement or null if not found or not requested
+	 */
+	statementRange?: Range$1;
+	/**
+	 * The set of substitution prompts that need to be completed by the user before the script can be executed
+	 */
+	substitutions?: Array<Substitution>;
+	/**
+	 * Bound parameters for SQL Statement
+	 */
+	binds?: Array<BindVariable>;
+};
+export type Link = {
 	/**
 	 * The link target
 	 */
 	href: string;
 };
-type Hyperlink = (Link & {
+export type Hyperlink = (Link & {
 	/**
 	 * The link target
 	 */
@@ -127,7 +209,7 @@ type Hyperlink = (Link & {
 	 */
 	type?: string;
 });
-type SqlResultSetMetadata = {
+export type SqlResultSetMetadata = {
 	/**
 	 * The name of the result set column
 	 */
@@ -153,8 +235,8 @@ type SqlResultSetMetadata = {
 	 */
 	isNullable?: boolean;
 };
-type SqlResultSetRow = Record<string, any>;
-type SqlResultSet = {
+export type SqlResultSetRow = Record<string, any>;
+export type SqlResultSet = {
 	metadata?: Array<SqlResultSetMetadata>;
 	items?: Array<SqlResultSetRow>;
 	/**
@@ -178,7 +260,7 @@ type SqlResultSet = {
 	 */
 	links?: Array<Hyperlink>;
 };
-type SqlScriptError = {
+export type SqlScriptError = {
 	/**
 	 * The a unique identifier for the error condition
 	 */
@@ -204,20 +286,7 @@ type SqlScriptError = {
 	 */
 	column?: number;
 };
-declare enum SqlStatementType {
-	QUERY = "query",
-	OTHER = "other",
-	IGNORE = "ignore",
-	PLSQL = "plsql",
-	SQLPLUS = "sqlplus",
-	DML = "dml",
-	TRANSACTION_CONTROL = "transaction-control",
-	SESSION_CONTROL = "session-control",
-	SYSTEM_CONTROL = "system-control",
-	DDL = "ddl",
-	JDBC = "jdbc"
-}
-type SqlStatementResponse = {
+export type SqlStatementResponse = {
 	/**
 	 * The index of the statement in the script
 	 */
@@ -276,7 +345,7 @@ type SqlStatementResponse = {
 	 */
 	result?: number;
 };
-type SqlScriptResponse = {
+export type SqlScriptResponse = {
 	env?: {
 		defaultTimeZone?: string;
 	};
@@ -356,6 +425,18 @@ export interface ConnectionSession {
 	execute(script: SqlScript, options?: ScriptExecutionJsonOptions): Promise<SqlScriptResponse>;
 	execute(script: SqlScript, options?: ScriptExecutionTextOptions): Promise<string>;
 	execute(script: SqlScript, options?: ScriptExecutionBinaryOptions): Promise<Readable>;
+	/**
+	 * Prepares the SQL to execute by analyzing the given sql script
+	 * and extracts the range based on the cursor position, and any bound
+	 * binds or substitutions
+	 * @param sql The SQL text to analyze
+	 * @param position Optional cursor position to determine which statement to prepare
+	 * @returns A promise that resolves to a SqlPrepareResponse containing statement info and variables
+	 */
+	prepareSql(sql: string, position?: {
+		line: number;
+		character: number;
+	}): Promise<SqlPrepareResponse>;
 }
 export type QueryExecutionOptions = {
 	/**
@@ -393,6 +474,24 @@ export type ConnectionStatusChangeEventData = {
 };
 export type ConnectionStatus = "added" | "removed" | "updated" | "opened" | "closed" | "renamed" | "reconnected" | "cloned";
 export type SessionStatus = "connected" | "disconnected";
+export interface ResultSet {
+	query(): SqlQuery;
+	rows(): {
+		[key: string]: any;
+	}[];
+	metadata(): {
+		[key: string]: any;
+	}[];
+	hasNext(): boolean;
+	next(): Promise<{
+		[key: string]: any;
+	}[] | undefined>;
+	close(): Promise<void>;
+}
+export type SqlQuery = {
+	sql: string;
+	binds?: BindVariable[];
+};
 export type SqlScript = SqlQuery;
 /**
  * Interface for dealing with worksheets, provides convenient methods
@@ -457,6 +556,11 @@ export interface Worksheets {
 export interface Worksheet {
 	editor: TextEditor;
 	session: ConnectionSession | undefined;
+	/**
+	 * Attaches the worksheet to a connection session.
+	 * @returns A promise that resolves when the worksheet is attached.
+	 */
+	attach(): Promise<ConnectionSession | undefined>;
 }
 export type WorksheetCommand = "runStatement" | "runScript" | "attach" | "detach" | "explainPlan";
 export interface Api {
