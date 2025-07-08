@@ -11,35 +11,16 @@ shell: bash
 
 steps:
   - type: Command
-    name: "Install Node.js 22 and matching npm"
-    command: |
-      # Ref https://github.com/oracle/netsuite-suitecloud-sdk/blob/master/sbom_generation.yaml
-      curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -
-      yum install -y nodejs
-      node -v
-      npm -v
-  - type: Command
-    name: "Install corepack"
+    name: "Install dependencies"
     command: |
       cd extension-api
-      npm install -g corepack
+      npm install
   - type: Command
-    name: "Install latest yarn"
+    name: "Run cyclonedx-node-npm on extension-api"
     command: |
       cd extension-api
-      yarn set version stable
-      yarn install
-  - type: Command
-    name: "Install extension-api dependencies"
-    command: |
-      cd extension-api
-      yarn install
-  - type: Command
-    name: "Run cyclonedx-node-yarn on extension-api"
-    command: |
-      cd extension-api
-      # For more details, visit https://github.com/CycloneDX/cyclonedx-node-yarn/blob/main/README.md
-      yarn dlx -q @cyclonedx/yarn-plugin-cyclonedx --production --output-format JSON --output-file artifactSBOM.json --spec-version 1.4
+      # For more details, visit https://github.com/CycloneDX/cyclonedx-node-npm/blob/main/README.md
+      npx @cyclonedx/cyclonedx-npm --omit dev --output-format JSON --output-file artifactSBOM.json --spec-version 1.4 --flatten-components
 outputArtifacts:
   - name: artifactSBOM
     type: BINARY
