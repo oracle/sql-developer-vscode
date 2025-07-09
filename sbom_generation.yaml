@@ -24,4 +24,4 @@ steps:
 outputArtifacts:
   - name: artifactSBOM
     type: BINARY
-    location: ${OCI_PRIMARY_SOURCE_DIR}/artifactSBOM.json
+    location: ${OCI_PRIMARY_SOURCE_DIR}/extension-api/artifactSBOM.json
