@@ -14,7 +14,7 @@ steps:
     name: "Install dependencies & cyclonedx-node-npm package"
     command: |
       cd extension-api
-      npm install && npm install --save-dev @cyclonedx/cyclonedx-npm
+      npm install && npm install --save-dev @cyclonedx/cyclonedx-npm@2.1.0
   - type: Command
     name: "Run cyclonedx-node-npm on extension-api"
     command: |
