@@ -1,0 +1,26 @@
+# This workflow will publish the @oracle/sql-developer-api package to NPM and can only be triggered manually
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Publish @oracle/sql-developer-api to NPM
+
+on: workflow_dispatch
+
+permissions:
+  id-token: write  # Required for OIDC
+  contents: read
+
+jobs:
+  publish-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+      # Ensure latest npm is installed
+      - name: Update npm
+        run: npm install -g npm@latest
+      - name: publish
+        working-directory: ./extension-api
+        run: npm publish --access=public
